@@ -73,11 +73,11 @@ this.loadLessonsPage();
 )
 .subscribe();
 
-merge(this.sort?.sortChange, this.paginator.page)
-.pipe(
-tap(() => this.loadLessonsPage())
-)
-.subscribe();
+// merge(this.sort?.sortChange, this.paginator.page)
+// .pipe(
+// tap(() => this.loadLessonsPage())
+// )
+// .subscribe();
 
 
 }
@@ -100,5 +100,12 @@ onRowClicked(row:User){
 console.log('Row clicked: ', row);
 }
 
+onPageFired(event){
+  let {pageIndex,pageSize} = event;
+  console.log(event);
+  console.log({pageIndex,pageSize});
+  // page: number, per_page:number
+  this.dataSource.loadLessons(0, '', 'asc', pageSize, pageIndex);
+}
 
 }

@@ -24,19 +24,19 @@ export class UserDatasourceComponent implements DataSource<User> {
   loadLessons(courseId:number,
     filter:string,
     sortDirection:string,
-    pageIndex:number,
-    pageSize:number) {
+    page:number,
+    per_page:number) {
 
             this.loadingSubject.next(true);
-
-            this.userService.getOnlyUsers( pageIndex ,  pageSize, filter).pipe(
+// page: number, per_page:number
+            this.userService.getOnlyUsers( page ,  per_page, filter).pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))
             )
             .subscribe(lessons => {
-              console.log('pageSize='+pageSize);
-              console.log('pageIndex='+pageIndex);
-              console.log('lessons='+JSON.stringify(lessons));
+              // console.log('pageSize='+per_page);
+              // console.log('page='+page);
+              // console.log('lessons='+JSON.stringify(lessons));
               return this.lessonsSubject.next(lessons); 
             });
 

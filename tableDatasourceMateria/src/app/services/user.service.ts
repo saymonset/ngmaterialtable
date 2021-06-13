@@ -21,16 +21,16 @@ export class UserService {
 
 
   getOnlyUsers(
-    offset: number, limit:number, predicates:string):  Observable<any | User[]> {
+    page: number, per_page:number, predicates:string):  Observable<any | User[]> {
 
-      console.log(offset + '=offs Saymon, limit='+limit);
+      console.log(page + '=offs Saymon, limit='+per_page);
     return this.http.get<User[]>('https://reqres.in/api/users', {
         params: new HttpParams()
             // .set('courseId', courseId.toString())
             // .set('filter', filter)
             // .set('sortOrder', sortOrder)
-            .set('page', offset + '')
-            .set('per_page', limit + '')
+            .set('page', per_page  + '')
+            .set('per_page', page + '')
     }).pipe(
          map( (resp: any | User[]) => 
          {

@@ -50,6 +50,7 @@
     
   </mat-table>
   
-  <mat-paginator [length]="10" [pageSize]="2"
-  [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+  <mat-paginator [length]="10" [pageSize]="2" #paginator
+  (page)="onPageFired($event)"
+  [pageSizeOptions]="[1, 2, 3]"></mat-paginator>
    
