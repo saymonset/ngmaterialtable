@@ -1,0 +1,55 @@
+<!-- 
+<pre>{{dataSource | json}}</pre> -->
+    <mat-form-field>
+
+        <input matInput placeholder="Search lessons" #input>
+
+    </mat-form-field>
+
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+
+        <mat-spinner></mat-spinner>
+
+    </div>
+
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+  
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef >#</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.id}}</mat-cell>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>email</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.email}}</mat-cell>
+    </ng-container>
+   
+    <ng-container matColumnDef="first_name">
+        <mat-header-cell *matHeaderCellDef>first_name</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.first_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+        <mat-header-cell *matHeaderCellDef>last_name</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.last_name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="avatar">
+        <mat-header-cell *matHeaderCellDef>avatar</mat-header-cell>
+        <mat-cell *matCellDef="let lesson">{{lesson.avatar}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"
+    (click)="onRowClicked(row)"
+    ></mat-row>
+
+     
+    
+  </mat-table>
+  
+  <mat-paginator [length]="10" [pageSize]="2"
+  [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+   
