@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {Observable, BehaviorSubject, of} from "rxjs";
 import {catchError, finalize} from "rxjs/operators";
 import { UserService } from '../services/user.service';
 import { User } from '../interfaces/users.interfaces';
+import { MatPaginator } from '@angular/material/paginator';
  
 export class UserDatasourceComponent implements DataSource<User> { 
 
@@ -15,6 +16,10 @@ export class UserDatasourceComponent implements DataSource<User> {
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.loadingSubject.asObservable();
+
+  public data : User[] = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   constructor(private userService: UserService) { }
@@ -37,6 +42,7 @@ export class UserDatasourceComponent implements DataSource<User> {
               // console.log('pageSize='+per_page);
               // console.log('page='+page);
               // console.log('lessons='+JSON.stringify(lessons));
+              this.data = lessons;
               return this.lessonsSubject.next(lessons); 
             });
 
